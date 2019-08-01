@@ -1,0 +1,12 @@
+<view class="container">
+  <image class="bg" src="../../public/img/bg_index.png"></image>
+  <view class="main-container">
+   <image class="logo" src="../../public/img/logo.png"></image>
+   <view bindtap="startTest" class="goTesting button">
+      开始测视
+    </view>
+    <view bindtap="goDailySign" class="goNearby button">
+      每日签到
+    </view>
+  </view>
+</view>

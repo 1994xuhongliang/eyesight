@@ -1,0 +1,80 @@
+.result {
+  width: 750rpx;
+  height: 1206rpx;
+  background: #f1f1f1;
+  box-sizing: border-box;
+  padding: 60rpx 0 0;
+}
+.result .card {
+  width: 690rpx;
+  height: 100%;
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  padding: 40rpx 0;
+}
+
+.result .header {
+  text-align: center;
+  font-size: 40rpx;
+  color: #d3d3d3;
+  margin: 0 auto 20rpx;
+}
+
+.result .result-text-1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 30rpx;
+  color: #172137;
+  box-sizing: border-box;
+  padding: 40rpx 80rpx;
+}
+
+.result .result-text-1 .value {
+  font-size: 40rpx;
+  color: orange;
+}
+.result .divide-line {
+  width: 100%;
+  height: 4rpx;
+  background: #d3d3d3;
+  margin: 60rpx auto;
+}
+
+.result .test-items {
+  margin: 40rpx auto 0;
+  
+}
+
+.result .test-items .test-item {
+  margin: 0 auto 40rpx;
+  box-sizing: border-box;
+  padding: 0 80rpx;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-size: 30rpx;
+  color: #172137;
+}
+
+.result .test-items .test-item .value {
+  color: orange;
+}
+
+.result .test-items .test-item.has-value .value {
+   color: greenyellow;
+}
+.share {
+  width: 520rpx;
+  color: white;
+  height: 80rpx;
+  font-size: 30rpx;
+  background-image: linear-gradient(-144deg,#39CFF7 0%,#136BFE 100%);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40rpx auto 0;
+}

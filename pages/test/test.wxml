@@ -1,0 +1,124 @@
+<!--pages/test/test.wxml-->
+<view class="viewTest" style="height:{{height}}px ;background-color:white;">
+    <view bindtouchend="{{flag==0?'tabletouchEnd':''}}" bindtouchmove="{{flag==0?'tabletouchMove':''}}" bindtouchstart="{{flag==0?'tabletouchStart':''}}" class="tableView" style="margin-top:{{tableTop}}px">
+        <scroll-view class="scrollviewUp" scroll-x bindscrolltoupper="navUpper" bindscrolltolower="navLower" bindscroll="navScroll" scroll-into-view="{{toView}}">
+            <view bindtap="changeTap" class="{{flag==1?'currentTap':''}}" id="1">视力测试</view>
+            <view bindtap="changeTap" class="{{flag==2?'currentTap':''}}" id="2">色盲测试</view>
+            <view bindtap="changeTap" class="{{flag==3?'currentTap':''}}" id="3">散光测试</view>
+            <view bindtap="changeTap" class="{{flag==4?'currentTap':''}}" id="4">眼底黄斑测试</view>
+            <view bindtap="changeTap" class="{{flag==5?'currentTap':''}}" id="5">老花测试</view>
+        </scroll-view>
+        <view class="table" style="width:100%;height:{{tableHeight}}px;" wx:if="{{flag==0}}">
+            <canvas canvasId="tableCanvas" disableScroll="true" style="width:100%;height:{{tableHeight}}px;"></canvas>
+        </view>
+        <view class="{{flag==1?'fullScreen':''}}" style="height:{{viewHeight}}px" wx:if="{{flag==1}}">
+            <view class="ceText">保持手机在眼前40cm处,选择E的朝向</view>
+            <canvas canvasId="cecanvas" class="cecanvas floatl" style="width:100%;height:{{ceHeight}}px;"></canvas>
+            <scroll-view class="viewTable" scrollLeft="{{scrollTo}}" scrollX="true" style="overflow:auto;white-space: nowrap; ">
+                <view class="{{idx==rrCurrent?'textColor':''}}" id="{{item.id}}" wx:for="{{ceitems}}" wx:for-index="idx">
+                    <text>{{item.big}}</text>
+                    <text>{{item.smail}} </text>
+                </view>
+            </scroll-view>
+            <view class="btns">
+                <button bindtap="ceUp" class="ce up" data-ce="{{ceResult}}">上</button>
+                <button bindtap="ceDown" class="ce down" data-ce="{{ceResult}}">下</button>
+                <button bindtap="ceLeft" class="ce left" data-ce="{{ceResult}}">左</button>
+                <button bindtap="cecenter" class="ce center" data-ce="{{ceResult}}">看不清</button>
+                <button bindtap="ceRight" class="ce right" data-ce="{{ceResult}}">右</button>
+            </view>
+        </view>
+        <view class="fullScreen" style="height:{{viewHeight}}px" wx:if="{{flag==2}}">
+            <view class="seDo">
+                <view class="{{seFive==1?'hasLight':'doCircle'}}">
+                    <text class="seTF" wx:if="{{seTrueOrFalseOne=='T'}}">V</text>
+                    <text class="seTF" wx:if="{{seTrueOrFalseOne=='F'}}">X</text>
+                </view>
+                <view class="doLine"></view>
+                <view class="{{seFive==2?'hasLight':'doCircle'}}">
+                    <text class="seTF" wx:if="{{seTrueOrFalseTwo=='T'}}">V</text>
+                    <text class="seTF" wx:if="{{seTrueOrFalseTwo=='F'}}">X</text>
+                </view>
+                <view class="doLine"></view>
+                <view class="{{seFive==3?'hasLight':'doCircle'}}">
+                    <text class="seTF" wx:if="{{seTrueOrFalseThree=='T'}}">V</text>
+                    <text class="seTF" wx:if="{{seTrueOrFalseThree=='F'}}">X</text>
+                </view>
+                <view class="doLine"></view>
+                <view class="{{seFive==4?'hasLight':'doCircle'}}">
+                    <text class="seTF" wx:if="{{seTrueOrFalseFour=='T'}}">V</text>
+                    <text class="seTF" wx:if="{{seTrueOrFalseFour=='F'}}">X</text>
+                </view>
+                <view class="doLine"></view>
+                <view class="{{seFive==5?'hasLight':'doCircle'}}"></view>
+            </view>
+            <view class="imageView">
+                <image class="subLeft" src="../../public/img/daltonismo10.png"></image>
+                <image class="showImage" src="../../public/img/daltonismo{{filePaths}}.png"></image>
+                <image class="subRight" src="../../public/img/daltonismo10.png"></image>
+            </view>
+            <view class="fillIn">
+                <text>请填写图片中的数字</text>
+                <picker-view bindchange="bindChangepicker" indicatorStyle="height: 40px;border-top:2px solid #66c4e6;border-bottom:2px solid #66c4e6;" style="width: 30%; height: 120px;margin-left:35%" value="{{valueSingle}}" wx:if="{{oneOrTwo==1}}">
+                    <picker-view-column style="width:100%">
+                        <view style="line-height: 50px;" wx:for="{{column}}">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+                <picker-view bindchange="bindChangepickerTwo" indicatorStyle="height: 40px;border-top:2px solid #66c4e6;border-bottom:2px solid #66c4e6;" style="width: 30%; height: 120px;margin-left:35%" value="{{value}}" wx:if="{{oneOrTwo==2}}">
+                    <picker-view-column style="width:20%">
+                        <view style="line-height: 50px;" wx:for="{{columnf}}">{{item}}</view>
+                    </picker-view-column>
+                    <picker-view-column style="width:20%">
+                        <view style="line-height: 50px" wx:for="{{columns}}">{{item}}</view>
+                    </picker-view-column>
+                </picker-view>
+            </view>
+            <view class="submitResult">
+                <button bindtap="sePass" data-se="{{seFalseNum}}">看不清楚</button>
+                <button bindtap="seSure" class="surebtn" data-se="{{seFalseNum}}">确认输入</button>
+            </view>
+        </view>
+        <view class="fullScreen" style="height:{{viewHeight}}px" wx:if="{{flag==3}}">
+            <canvas bindtouchend="touchEnd" bindtouchmove="touchMove" bindtouchstart="touchStart" canvasId="canvas1" class="sancanvans" disableScroll="true" style="width:100%;height:300px;"></canvas>
+            <view class="san">请确保直视图片,选择您观察的结果</view>
+            <radio-group bindchange="radioChange" class="radio-group">
+                <label class="radio" wx:for="{{sanitems}}">
+                    <radio checked="{{item.checked}}" value="{{item.name}}"></radio>{{item.value}}
+                </label>
+            </radio-group>
+            <button bindtap="sanSubmmit" class="sanbtn" data-index="{{sanVal}}">提交</button>
+        </view>
+        <view class="fullScreen maculafundus" style="height:{{viewHeight}}px" wx:if="{{flag==4}}">
+            <view class="san">眼底黄斑测试</view>
+            <image class="maculafundus-img" src="../../public/img/maculafundus.png"></image>
+            <radio-group bindchange="radioChange" class="radio-group">
+                <label class="radio" wx:for="{{huangitems}}">
+                    <radio checked="{{item.checked}}" value="{{item.name}}"></radio>{{item.value}}
+                </label>
+            </radio-group>
+            <button bindtap="huangGuangSubmmit" class="sanbtn" data-index="{{sanVal}}">提交</button>
+        </view>
+        <view class="fullScreen presbyopia" style="height:{{viewHeight}}px" wx:if="{{flag==5}}">
+            <view class="san">老花测试</view>
+            <view class="test-indication">
+                <view>测试说明</view>
+                <view>遮住一只眼看下图，正常人看到的红绿背景上的字母一样黑</view>
+                <view>如果红色背景上的字清楚，则近视；如果绿色背景上的字清楚，则远视。</view>
+            </view>
+            <image class="presbyopia-img" src="../../public/img/presbyopia.jpeg"></image>
+            <view class="presbyopia-select-area" type="button">
+                <button wx:for="{{presbyopia}}" bindtap="presbyopiaSubmit" wx:key="{{item.name}}" data-index="{{item.name}}">{{item.value}}</button>
+            </view>
+          
+        </view>
+        <cover-view class="currentResultToastWrapper" wx:if="{{isShowToast}}">
+          <cover-view class="currentResultToast" bindlongtap="closeResultTest">
+            <cover-view class="toast-header">本项测试结果:</cover-view>
+            <cover-view class="toast-text">{{toastText || '未测试'}}</cover-view>
+            <button class="toast-event" bindtap="goNextTest" wx:if="{{!isTestEnd}}">下一项</button>
+            <button class="toast-event" bindtap="goTestResult" wx:if="{{isTestEnd}}">提交</button>
+          </cover-view>
+        </cover-view>
+    </view>
+</view>
+

@@ -1,0 +1,46 @@
+/**index.wxss**/
+.button {
+    /* margin: 40rpx 40rpx 0rpx 40rpx; */
+    width: 670rpx;
+    height: 120rpx;
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 120rpx;
+    color: #585E60;
+    position: relative;
+}
+
+.main-container {
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+  padding: 200rpx 0 0;
+}
+.goTesting {
+    /* margin-top: 290rpx; */
+}
+
+.goNearby {
+    margin-top: 40rpx;
+}
+
+.logo {
+    width: 190rpx;
+    height: 200rpx;
+    display: block;
+    margin: 0 auto 300rpx;
+    background: red;
+}
+
+.bg {
+    width: 750rpx;
+    height: 1334rpx;
+    position: absolute;
+}
+
+.body{
+  position: relative;
+}
+

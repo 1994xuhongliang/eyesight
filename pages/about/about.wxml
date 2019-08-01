@@ -1,0 +1,8 @@
+<!--pages/about/about.wxml-->
+<view class="container">
+<image class="bc-img" src="../../public/img/bg_index.png"></image>
+<view class="main-container">
+<image class="main-info" src="../../public/img/bg_info.png"></image>
+<button class="go-test" bindtap="goTest">知道了，开始测试</button>
+</view>
+</view>
