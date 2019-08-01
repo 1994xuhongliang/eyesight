@@ -7,6 +7,7 @@ var e = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? func
 
 App({
   onLaunch: function (o) {
+    console.log('start it...');
     console.log(o);
     var t = wx.getStorageSync("user") || {};
     if ("object" == (void 0 === t ? "undefined" : e(t)) && !t.openid && (t.expires_in || Date.now()) < Date.now() + 100) {
