@@ -1,17 +1,24 @@
 <scroll-view class='result' scroll-y>
+  <image class="bottom-img" src="../../public/img/result-1.png"></image>
   <view class="card">
+    <image class="result-icon" src="../../public/img/result-icon-{{resultIconFlag}}.png"></image>
     <view class='header'>检测结果</view>
     <view class='result-text-1'>
-    您的视力为：
-    <view class="value">{{viewResult}}</view>
+    您的视力标签为：
+    <view class="value">{{viewResultLike}}</view>
     </view>
-    <view class="divide-line"></view>
+    <view class='result-text-2'>
+      {{viewResultText}}
+    </view>
     <view class="test-items">
     <view wx:for="{{testItems}}" class="test-item {{item.value !== '未检测'&&'has-value'}}">
       <view class="label">{{item.label}}</view>
       <view class="value">{{item.value}}</view>
     </view>
     </view>
-    <button class="share" bindtap="share" open-type='share'>分享</button>
   </view>
+  <view class="button-box">
+      <button class="each-button" bindtap="goSign">参与打卡</button>
+      <button class="each-button" bindtap="goService">专属客服</button>
+    </view>
 </scroll-view>

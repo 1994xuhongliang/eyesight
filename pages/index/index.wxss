@@ -1,15 +1,16 @@
 /**index.wxss**/
 .button {
     /* margin: 40rpx 40rpx 0rpx 40rpx; */
-    width: 670rpx;
-    height: 120rpx;
+    width: 520rpx;
+    height: 80rpx;
     background: rgb(255, 255, 255);
-    border-radius: 8px;
-    font-size: 20px;
+    border-radius: 80rpx;
+    font-size: 36rpx;
     text-align: center;
-    line-height: 120rpx;
-    color: #585E60;
+    line-height: 80rpx;
+    color: rgba(89, 94, 96, 1);
     position: relative;
+    box-shadow: 5rpx 5rpx 5rpx 0rpx rgba(0, 0, 0, .1);
 }
 
 .main-container {
@@ -27,11 +28,10 @@
 }
 
 .logo {
-    width: 190rpx;
-    height: 200rpx;
+    width: 252rpx;
+    height: 324rpx;
     display: block;
     margin: 0 auto 300rpx;
-    background: red;
 }
 
 .bg {

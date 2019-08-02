@@ -13,8 +13,11 @@ wx.getSystemInfo({
 }), 
 Page({
   data: {
-    viewResult: null,
-    testItems: []
+    viewResult: '',
+    viewResultText: '',
+    testItems: [],
+    resultIconFlag: '',
+    showServiceToast: false
   },
   onLoad: function (a) {
     var maps = {
@@ -24,20 +27,41 @@ Page({
       huangbanResult: '黄斑检测', // 眼底黄斑
       laohuaResult: '老花检测', // 老花
     };
-    var resultArr = [], viewResult;
+    var resultArr = [], viewResult, viewResultLike, viewResultText, resultIconFlag;
     for (let key in o.resultItems) {
       resultArr.push({
         label: maps[key],
         value: o.resultItems[key] || '未检测'
       });
-      if (key == 'viewResult') {
-        viewResult = o.resultItems[key] || '未检测';
+      if ((key == 'viewResult')) {
+        viewResult = o.resultItems[key];
+        if (Number(viewResult) >= 5.2) {
+          viewResultLike = '猫头鹰';
+          viewResultText = '你的视力非常敏锐哦！';
+          resultIconFlag = 1;
+        } else if (Number(viewResult) >= 5.0) {
+          viewResultLike = '猴子';
+          viewResultText = '你的视力还不错，要保持住哦！';
+          resultIconFlag = 2;
+        } else if (Number(viewResult) >= 4.7) {
+          viewResultLike = '蜥蜴';
+          viewResultText = '你的视力有点差，要注意了哦！';
+          resultIconFlag = 3;
+        } else {
+          viewResultLike = '大熊猫';
+          viewResultText = '你的视力不太妙哦！';
+          resultIconFlag = 4;
+        };
       }
+      console.log(resultArr);
     };
   
     this.setData({
       testItems: resultArr,
-      viewResult
+      viewResult,
+      viewResultLike,
+      viewResultText,
+      resultIconFlag
     });
   },
   onUnload: function() {
@@ -71,6 +95,18 @@ Page({
     };
 　　// 返回shareObj
 　　return shareObj;
+  },
+  
+  goSign: function() {
+    wx.navigateTo({
+      url: '../dailySign/dailySign',
+    })
+  },
+
+  goService: function() {
+    this.setData({
+      showServiceToast: true
+    });
   }
     
 
