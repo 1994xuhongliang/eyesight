@@ -17,7 +17,7 @@ Page({
     viewResultText: '',
     testItems: [],
     resultIconFlag: '',
-    showServiceToast: false
+    showServiceToast: false,
   },
   onLoad: function (a) {
     var maps = {
@@ -35,23 +35,29 @@ Page({
       });
       if ((key == 'viewResult')) {
         viewResult = o.resultItems[key];
-        if (Number(viewResult) >= 5.2) {
-          viewResultLike = '猫头鹰';
-          viewResultText = '你的视力非常敏锐哦！';
-          resultIconFlag = 1;
-        } else if (Number(viewResult) >= 5.0) {
-          viewResultLike = '猴子';
-          viewResultText = '你的视力还不错，要保持住哦！';
-          resultIconFlag = 2;
-        } else if (Number(viewResult) >= 4.7) {
-          viewResultLike = '蜥蜴';
-          viewResultText = '你的视力有点差，要注意了哦！';
-          resultIconFlag = 3;
-        } else {
-          viewResultLike = '大熊猫';
-          viewResultText = '你的视力不太妙哦！';
-          resultIconFlag = 4;
-        };
+        if(viewResult) {
+          if (Number(viewResult) >= 5.2) {
+            viewResultLike = '猫头鹰';
+            viewResultText = '你的视力非常敏锐哦！';
+            resultIconFlag = 1;
+          } else if (Number(viewResult) >= 5.0) {
+            viewResultLike = '猴子';
+            viewResultText = '你的视力还不错，要保持住哦！';
+            resultIconFlag = 2;
+          } else if (Number(viewResult) >= 4.7) {
+            viewResultLike = '蜥蜴';
+            viewResultText = '你的视力有点差，要注意了哦！';
+            resultIconFlag = 3;
+          } else {
+            viewResultLike = '大熊猫';
+            viewResultText = '你的视力不太妙哦！';
+            resultIconFlag = 4;
+          };
+        }else {
+          viewResultLike = '未测试';
+          viewResultText = '请先完成测试！';
+          resultIconFlag = null;
+        }
       }
       console.log(resultArr);
     };
@@ -107,7 +113,19 @@ Page({
     this.setData({
       showServiceToast: true
     });
-  }
+  },
+
+  closeService: function() {
+    this.setData({
+      showServiceToast: false
+    });
+  },
+
+  mkPhone: function() {
+    wx.makePhoneCall({
+      phoneNumber: '4007289978',
+    });
+  },
     
 
 });

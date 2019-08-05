@@ -21,4 +21,13 @@
       <button class="each-button" bindtap="goSign">参与打卡</button>
       <button class="each-button" bindtap="goService">专属客服</button>
     </view>
+    <view class="service-toast-wrapper" wx:if="{{showServiceToast}}">
+        <view class="service-bac" bindtap="closeService"></view>
+        <view class="service-main">
+          <view class="close-icon" bindtap="closeService"></view>
+          <view class="service-header"></view>
+          <view class="service-text">我们将会全心全意为您提供满意周到的 咨询服务，也希望您能支持和监督我们 的服务！</view>
+          <view class="service-phone" bindtap="mkPhone">拨打客服热线</view>
+        </view>
+    </view>
 </scroll-view>
