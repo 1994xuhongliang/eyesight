@@ -159,8 +159,8 @@ Page({
     firstStemp= (new Date()).setDate(1),
     calendarData = [];
 
-    let is_sign=false, is_empty=true;
     for (let i = 0; i < 35; i++) {
+      let is_sign = false, is_empty = true;
       let currentStemp = firstStemp + 1000 * 60 * 60 * 24 * (i - first - 1),
         currentDate = new Date(currentStemp),
         currentYear = String(currentDate.getFullYear()).padStart(4, '0'),
