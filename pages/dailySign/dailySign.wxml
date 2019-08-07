@@ -1,2 +1,91 @@
-<!--pages/dailySign/dailySign.wxml-->
-<text>pages/dailySign/dailySign.wxml</text>
+<view class='day-sign'>
+  <view class="bac"></view>
+  <view class="main">
+    <view class="header-area">
+      <view class="header-desc">
+        视力超好的小益
+      </view>
+      <view class="sign-status">
+       {{signStatus? '已打卡' : '未打卡'}}
+      </view>
+    </view>
+    <view class="card">
+      <view class="card-head">
+        <view class="date-area">
+          <view class="month">{{today.date}}</view>
+          <view class="main-date-box">
+            <view class="week">{{today.week}}</view>
+            <view class="year-month"> {{today.year_month}} </view>
+          </view>
+        </view>
+
+        <view class="contant-sign">
+          你已经连续打卡<text class="sign-count">{{sign_count}}天</text>
+        </view>
+
+        <view class="calendar-icon"></view>
+      </view>
+
+      <view class="calendar-area">
+        <view class="weeks-box">
+          <view class="weeks-item" wx:for="{{weeks}}">
+            {{item}}
+          </view>
+        </view>
+        <view class="calendar-box">
+          <view class="calendar-date-item" wx:for="{{calendarData}}">
+            <block wx:if="{{!item.is_empty}}">
+                <view class="calendar-date">{{item.date}}</view>
+                <view class="indicate-dot" wx:if="{{item.is_sign}}"></view>
+            </block>
+          </view>
+        </view>
+      </view>
+
+      <view class="need-sign-btn" wx:if="{{is_need_sign}}">打卡</view>
+      <view class="not-need-sign-btn" wx:if="{{!is_need_sign}}">打卡</view>
+
+      <view class="sign-indicate">累计打卡15天及30天有好礼相送哟！</view>
+
+
+      <view class="progress-box">
+        <view class="progress-top">
+          <view class="progress-top-item">1天</view>
+          <view class="progress-top-item gift-icon"></view>
+           <view class="progress-top-item gift-icon"></view>
+        </view>
+        <view class="progress-main">
+          <view class="progress-dot ten-day">
+            <view class="dot-inner" wx:if="{{sign_count === 10}}"></view>
+          </view>
+          <view class="progress-dot fifteen-day">
+            <view class="dot-inner" wx:if="{{sign_count === 15}}"></view>
+          </view>
+          <view class="progress-dot thirty-day">
+            <view class="dot-inner" wx:if="{{sign_count === 15}}"></view>
+          </view>
+          <view class="progress" style="width: {{100*sign_count / 30}}%"></view>
+        </view>
+        <view class="progress-bottom">
+          <view class="bottom-text ten-day">10天</view>
+          <view class="bottom-text fifteen-day">15天</view>
+          <view class="bottom-text thirty-day">30天</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <view class="show-sign-days" wx:if="{{showSignToast}}">
+    <view class="toast-bac" bindtap="closeSignToast"></view>
+    <view class="sign-toast-card">
+      <view class="close-icon" bindtap="closeSignToast"></view>
+      <view class="sign-toast-icon"></view>
+      <view class="text-1">打卡成功</view>
+      <view class="text-2">你已累计打卡{{sign_count}}，</view>
+      <view class="text-3" wx:if="{{sign_count === 10}}">距离丰厚奖励还剩5天</view>
+      <view class="text-3" wx:if="{{sign_count >= 15}}">达到领奖条件</view>
+      <view class="toast-confirm">确认</view>
+    </view>
+  </view>
+</view>
