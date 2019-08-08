@@ -1,5 +1,9 @@
 // pages/dailySign/dailySign.js
 
+const app = getApp(),
+global = app.globalData;
+console.log('global: ', global);
+
 const mapWeek = {
   1: '周一',
   2: '周二',
@@ -29,11 +33,12 @@ Page({
    */
   data: {
     weeks: ['日', '一', '二', '三', '四', '五', '六'],
-    signStatus: true,
-    today: {},
-    totalDays: 30,
-    sign_count: 15,
-    showSignToast: false,
+    signStatus: true, // 今日是否打卡，暂无用
+    today: {}, // 当天日期数据
+    sign_count: 0, // 累计打卡
+    showSignToast: false, // 是否展示10， 15， 30弹窗
+    showSignImage: false, // 是否展示图片弹窗
+    sign_image_url: '', //打卡成功的图片弹窗url
   },
 
   /**
@@ -48,19 +53,52 @@ Page({
       year_month: (date.getMonth() + 1) + '月 ' + date.getFullYear()
     };
 
+    let that = this;
 
-    // for(let i=1; i<36; i++) {
-    //   calendarData.push({
-    //     date: i,
-    //     is_sign: Math.random() > .5
-    //   });
-    // };
+    wx.showLoading({
+      title: 'loading...',
+    });
+    wx.request({
+      url: 'http://zmc-vital.com/wechat/eyesight/check',
+      data: {
+        id: global && global.userData && global.userData.id,
+        auth: global && global.userData && global.userData.auth
+      },
+      method: "POST",
+      success: function (res) {
+        console.log(res);
+        wx.hideLoading();
+        let sign_count = res.result && res.result.sign_count,
+          sign_image_url = res.result && res.result.sign_image,
+          showSignToast = [10, 15, 30].includes(sign_count),
+          showSignImage = ![10, 15, 30].includes(sign_count);
 
-    this.setData({
+        // 将请求回来的数据设置到页面
+        that.setData({
+          today,
+          calendarData: that.initCalendar(res.result && res.result.list),
+          sign_count,
+          sign_image_url,
+          showSignToast,
+          showSignImage,
+        });
+      },
+      fail: function(e) {
+        console(e);
+        wx.hideLoading();
+      },
+    });
+
+    /**
+     * 给个初始信息
+     */
+    that.setData({
       today,
-      calendarData: this.initCalendar(),
+      calendarData: that.initCalendar(),
     });
   },
+
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -121,6 +159,15 @@ Page({
   },
 
   /**
+   * 挂壁图片弹窗
+   */
+  closeSignImage: function() {
+    this.setData({
+      showSignImage: false
+    });
+  },
+
+  /**
    * 获取当月第一天偏移量
    */
   firstDayOffset: function() {
@@ -153,7 +200,7 @@ Page({
   /**
    * 生成日历列表
    */
-  initCalendar: function() {
+  initCalendar: function(serverdata=[]) {
     let first = this.firstDayOffset(),
     last = this.lastDayDate(),
     firstStemp= (new Date()).setDate(1),
@@ -168,8 +215,8 @@ Page({
         currentDay = String(currentDate.getDate()).padStart(2, '0'),
         currentFull = currentYear + '-' + currentMonth + '-' + currentDay;
       if ((i >= first) && (i <= last)) {
-        for (let j = 0; j < signData.length; j++) {
-          if (currentFull === signData[j].date) {
+        for (let j = 0; j < serverdata.length; j++) {
+          if (currentFull === serverdata[j].date) {
             is_sign = true;
             break;
           }
@@ -185,5 +232,23 @@ Page({
 
     console.log(calendarData);
     return calendarData;
+  },
+
+  /**
+   * 预览图片， 可保存
+   */
+  lookImage: function(e) {
+    const image_url = this.data.sign_image_url || '';
+    console.log(image_url);
+    wx.previewImage({
+      urls: [image_url],
+      current: image_url,
+      success: function(res) {
+        console.log('success', res);
+      },
+      fail: function(e) {
+        console.log('fail', e);
+      }
+    })
   }
 })

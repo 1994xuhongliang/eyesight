@@ -224,7 +224,18 @@ Page({
     tableHeight: 0
   },
   onLoad: function (e) {
-    console.log(e), this.setData({
+    console.log(e);
+    // 每次进测试清空数据
+    o.resultItems = {
+      huangbanResult: null,
+      laohuaResult: null,
+      sanguangResult: null,
+      semangResult: null,
+      viewResult: null,
+    };
+    
+    console.log('全局数据是', o);
+    this.setData({
       flag: e.flag
     });
   },
@@ -897,8 +908,34 @@ Page({
   },
   // 提交测试结果
   goTestResult: function(e) {
-    wx.navigateTo({
-      url: '../result/result',
-    })
+    let app = getApp();
+    let testResult = app.globalData && app.globalData.resultItems,
+        id = app.globalData && app.globalData.userData && app.globalData.userData.id,
+        auth = app.globalData && app.globalData.userData && app.globalData.userData.auth;
+    console.log('提交结果： ', testResult);
+
+    wx.showLoading({
+      title: 'loading',
+    });
+    wx.request({
+      url: 'http://zmc-vital.com/wechat/eyesight/addEyeSight',
+      data: {
+        id,
+        auth,
+        eyeSight: testResult
+      },
+      method: "POST",
+      success: function (res) {
+        console.log('请求结果', res);
+        wx.hideLoading();
+        wx.navigateTo({
+          url: '../result/result',
+        });
+      },
+      fail: function(e) {
+        console.log('发生错误', e);
+        wx.hideLoading();
+      }
+    });
   }
 });

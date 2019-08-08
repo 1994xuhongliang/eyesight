@@ -5,7 +5,29 @@ const app = getApp()
 Page({
   data: {
     userInfo: {},
-    directionData: ["up", "right", "down", "left"]
+    directionData: ["up", "right", "down", "left"],
+    showCanNotSignToast: false,
+  },
+  getPhoneNumber (e) {
+    console.log(e);
+    if(e.detail.iv&&e.detail.encryptedData){
+      //用户同意
+      var id=app.globalData.userData.id,session=app.globalData.userData.session,t="http://zmc-vital.com/wechat/gate/getPhoneNumber";
+      wx.request({
+        url: t,
+        data: {
+          name:"eyesight",
+          id:id,
+          session:session,
+          iv:e.detail.iv,
+          encryptedData:e.detail.encryptedData
+        },
+        method: "POST",
+        success: function (e) {
+          console.log(e);
+        }
+      });
+    }
   },
   startTest: function () {
     wx.navigateTo({
@@ -13,37 +35,37 @@ Page({
     });
   },
   goDailySign: function () {
-    wx.navigateTo({
-      url: "../dailySign/dailySign"
+    let testResult = app.globalData && app.globalData.resultItems,
+      eyeSight = app.globalData && app.globalData.userData && app.globalData.userData.eyeSight;
+    if (eyeSight) {
+     return wx.navigateTo({
+        url: "../dailySign/dailySign"
+      });
+    }
+    this.setData({
+      showCanNotSignToast: true
     });
   },
+
+  /**
+   * 关闭提示测试再打卡弹窗
+   */
+  closeCanNotSignToast: function() {
+    this.setData({
+      showCanNotSignToast: false
+    });
+  },
+
+  /**
+   * 弹窗，去测试
+   */
+  goTestPage: function() {
+    wx.navigateTo({
+      url: "../test/test"
+    });
+  },
+
   onLoad: function () {
-    // if (app.globalData.userInfo) {
-    //   this.setData({
-    //     userInfo: app.globalData.userInfo,
-    //     hasUserInfo: true
-    //   })
-    // } else if (this.data.canIUse){
-    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //   // 所以此处加入 callback 以防止这种情况
-    //   app.userInfoReadyCallback = res => {
-    //     this.setData({
-    //       userInfo: res.userInfo,
-    //       hasUserInfo: true
-    //     })
-    //   }
-    // } else {
-    //   // 在没有 open-type=getUserInfo 版本的兼容处理
-    //   wx.getUserInfo({
-    //     success: res => {
-    //       app.globalData.userInfo = res.userInfo
-    //       this.setData({
-    //         userInfo: res.userInfo,
-    //         hasUserInfo: true
-    //       })
-    //     }
-    //   })
-    // }
   },
   getUserInfo: function(e) {
     console.log(e)

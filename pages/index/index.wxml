@@ -2,11 +2,21 @@
   <image class="bg" src="../../public/img/bg_index.png"></image>
   <view class="main-container">
    <image class="logo" src="../../public/img/index-logo.png"></image>
-   <view bindtap="startTest" class="goTesting button">
+   <button class="goTesting button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">
       开始测视
-    </view>
-    <view bindtap="goDailySign" class="goNearby button">
+    </button>
+    <button bindtap="goDailySign" class="goNearby button">
       每日签到
+    </button>
+  </view>
+  <view class="can-not-sign-wrapper" wx:if="{{showCanNotSignToast}}">
+    <view class="bac" bindtap="closeCanNotSignToast"></view>
+    <view class="card">
+      <view class="close-icon" bindtap="closeCanNotSignToast"></view>
+      <view class="icon"></view>
+      <view class="text-1">小益温馨提示</view>
+      <view class="text-2">您还未参与测试哦，测试完再来打卡吧！</view>
+      <view class="btn" bindtap="goTestPage">立即前往</view>
     </view>
   </view>
 </view>

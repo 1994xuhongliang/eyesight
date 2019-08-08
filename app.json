@@ -15,5 +15,8 @@
     "backgroundColor": "#3EC0ED",
     "enablePullDownRefresh": false
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList":[
+    "wx675d79c292e7e4ee"
+  ]
 }

@@ -88,4 +88,19 @@
       <view class="toast-confirm">确认</view>
     </view>
   </view>
+
+  <view class="show-sign-image" wx:if="{{showSignImage}}">
+    <view class="sign-image-bac" bindtap="closeSignImage"></view>
+    <view class="sign-image-card">
+      <view class="image-box">
+        <image class="sign-image" src="{{sign_image_url}}" bindtap="lookImage" ></image>
+        <view class="tag">
+          <view class="tag-text">打卡第{{sign_count}}天</view>
+        </view>
+      </view>
+      
+      <view class="sign-image-text">点击图片后，长按可保存</view>
+      <view class="close-btn" bindtap="closeSignImage"></view>
+    </view>
+  </view>
 </view>

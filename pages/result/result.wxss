@@ -50,7 +50,7 @@
   font-size: 30rpx;
   color: rgba(55, 55, 55, 1);
   box-sizing: border-box;
-  padding: 0 80rpx;
+  padding: 0 0 0 80rpx;
   margin: 0 auto 20rpx;
 }
 .result .result-text-2 {
