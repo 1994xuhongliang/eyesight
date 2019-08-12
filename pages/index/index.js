@@ -12,7 +12,7 @@ Page({
     console.log(e);
     if(e.detail.iv&&e.detail.encryptedData){
       //用户同意
-      var id=app.globalData.userData.id,session=app.globalData.userData.session,t="http://zmc-vital.com/wechat/gate/getPhoneNumber";
+      var id=app.globalData.userData.id,session=app.globalData.userData.session,t="https://wechat.zmc-vital.com/gate/getPhoneNumber";
       wx.request({
         url: t,
         data: {
@@ -23,10 +23,13 @@ Page({
           encryptedData:e.detail.encryptedData
         },
         method: "POST",
-        success: function (e) {
+        success: (e)=> {
           console.log(e);
+          this.startTest();
         }
       });
+    }else{
+      this.startTest();
     }
   },
   startTest: function () {
@@ -61,7 +64,7 @@ Page({
    */
   goTestPage: function() {
     wx.navigateTo({
-      url: "../test/test"
+      url: "../about/about"
     });
   },
 

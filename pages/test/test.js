@@ -12,7 +12,7 @@ wx.getSystemInfo({
   }
 });
 
-var c = t / 23 * 5, d = 1, g = 1;
+var c = t / 23 * 28, d = 1, g = 1;
 Page({
   data: {
     isShowToast: false,
@@ -80,7 +80,7 @@ Page({
     },
     seImages: [10, 12, 15, 16, 18, "2&2", 2, 29, "42&2", 42, "5&2", 5, "57&2", 57, "6&2", 6, 7, "74&2", 74, 8, 96],
     seImage: "",
-    rrCurrent: 5,
+    rrCurrent: 13,
     rrArray: [],
     sanitems: [{
       name: "get",
@@ -100,10 +100,15 @@ Page({
       {
         name: "get",
         value: "红字清楚"
-      }, {
+      }, 
+      {
+        name: "normal",
+        value: "一样黑"
+      },
+      {
         name: "no",
         value: "绿字清楚"
-      }
+      }, 
     ],
     ceitems: [{
       id: "a",
@@ -743,7 +748,7 @@ Page({
     var result = e.currentTarget.dataset.index;
     console.log(result);
     var isTestEnd;
-    o.resultItems.laohuaResult = (result == 'get' ? '近视' : null) || (result == 'no' ? '远视' : null),
+    o.resultItems.laohuaResult = (result == 'get' ? '近视' : null) || (result == 'no' ? '远视' : null) || (result == 'normal' ? '正常' : null),
       isTestEnd = o.resultItems.viewResult && o.resultItems.sanguangResult && o.resultItems.semangResult && o.resultItems.huangbanResult && o.resultItems.laohuaResult,
       this.setData({
         isShowToast: true,
@@ -918,7 +923,7 @@ Page({
       title: 'loading',
     });
     wx.request({
-      url: 'http://zmc-vital.com/wechat/eyesight/addEyeSight',
+      url: 'https://wechat.zmc-vital.com/eyesight/addEyeSight',
       data: {
         id,
         auth,

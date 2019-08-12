@@ -21,18 +21,27 @@
                 </view>
             </scroll-view>
             <view class="btns">
-                <button bindtap="ceUp" class="ce up" data-ce="{{ceResult}}">上</button>
-                <button bindtap="ceDown" class="ce down" data-ce="{{ceResult}}">下</button>
-                <button bindtap="ceLeft" class="ce left" data-ce="{{ceResult}}">左</button>
-                <button bindtap="cecenter" class="ce center" data-ce="{{ceResult}}">看不清</button>
-                <button bindtap="ceRight" class="ce right" data-ce="{{ceResult}}">右</button>
+                <view class="btn-box">
+                  <button bindtap="ceUp" class="ce up" data-ce="{{ceResult}}">上</button>
+                </view>
+                <view class="btn-box">
+                  <button bindtap="ceLeft" class="ce left" data-ce="{{ceResult}}">左</button>
+                  <button bindtap="cecenter" class="ce center" data-ce="{{ceResult}}">看不清</button>
+                  <button bindtap="ceRight" class="ce right" data-ce="{{ceResult}}">右</button>
+                </view>
+                <view class="btn-box">
+                <button bindtap="ceDown" class="ce down" data-ce="{{ceResult}}">下</button> 
+                </view>
+               
+                
+                
             </view>
         </view>
         <view class="fullScreen" style="height:{{viewHeight}}px" wx:if="{{flag==2}}">
             <view class="seDo">
                 <view class="{{seFive==1?'hasLight':'doCircle'}}">
-                    <text class="seTF" wx:if="{{seTrueOrFalseOne=='T'}}">V</text>
-                    <text class="seTF" wx:if="{{seTrueOrFalseOne=='F'}}">X</text>
+                    <text class="seTF right" wx:if="{{seTrueOrFalseOne=='T'}}">V</text>
+                    <text class="seTF wrong" wx:if="{{seTrueOrFalseOne=='F'}}">X</text>
                 </view>
                 <view class="doLine"></view>
                 <view class="{{seFive==2?'hasLight':'doCircle'}}">
@@ -101,7 +110,6 @@
         <view class="fullScreen presbyopia" style="height:{{viewHeight}}px" wx:if="{{flag==5}}">
             <view class="san">老花测试</view>
             <view class="test-indication">
-                <view>测试说明</view>
                 <view>遮住一只眼看下图，正常人看到的红绿背景上的字母一样黑</view>
                 <view>如果红色背景上的字清楚，则近视；如果绿色背景上的字清楚，则远视。</view>
             </view>

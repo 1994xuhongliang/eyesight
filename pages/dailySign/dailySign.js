@@ -59,7 +59,7 @@ Page({
       title: 'loading...',
     });
     wx.request({
-      url: 'http://zmc-vital.com/wechat/eyesight/check',
+      url: 'https://wechat.zmc-vital.com/eyesight/check',
       data: {
         id: global && global.userData && global.userData.id,
         auth: global && global.userData && global.userData.auth
@@ -68,15 +68,15 @@ Page({
       success: function (res) {
         console.log(res);
         wx.hideLoading();
-        let sign_count = res.result && res.result.sign_count,
-          sign_image_url = res.result && res.result.sign_image,
+        let sign_count = res.data && res.data.sign_count,
+          sign_image_url = res.data && res.data.sign_image,
           showSignToast = [10, 15, 30].includes(sign_count),
           showSignImage = ![10, 15, 30].includes(sign_count);
 
         // 将请求回来的数据设置到页面
         that.setData({
           today,
-          calendarData: that.initCalendar(res.result && res.result.list),
+          calendarData: that.initCalendar(res.data && res.data.list),
           sign_count,
           sign_image_url,
           showSignToast,
@@ -150,6 +150,31 @@ Page({
   },
   
   /**
+   * 弹窗确认
+   */
+  sureSignToast:function(){
+    switch(this.data.sign_count){
+      case 10:
+        this.setData({
+          showSignToast: false
+        });
+      break;
+      case 15:
+        wx.navigateToMiniProgram({
+          appId: 'wx675d79c292e7e4ee',
+          path:"pages/market/coupon/pickcoupon?id=969&storeId=138777939"
+        })
+      break;
+      case 30:
+        wx.navigateToMiniProgram({
+          appId: 'wx675d79c292e7e4ee',
+          path: "/pages/goods/detail?id=55977920139&storeId=0"
+        })
+      break;
+    }
+  },
+
+  /**
    * 关闭弹窗
    */
   closeSignToast: function() {
@@ -208,13 +233,13 @@ Page({
 
     for (let i = 0; i < 35; i++) {
       let is_sign = false, is_empty = true;
-      let currentStemp = firstStemp + 1000 * 60 * 60 * 24 * (i - first - 1),
+      let currentStemp = firstStemp + 1000 * 60 * 60 * 24 * (i - first),
         currentDate = new Date(currentStemp),
         currentYear = String(currentDate.getFullYear()).padStart(4, '0'),
         currentMonth = String(currentDate.getMonth() + 1).padStart(2, '0'),
         currentDay = String(currentDate.getDate()).padStart(2, '0'),
         currentFull = currentYear + '-' + currentMonth + '-' + currentDay;
-      if ((i >= first) && (i <= last)) {
+      if ((i >= first) && (Number(currentDay)<=last)) {
         for (let j = 0; j < serverdata.length; j++) {
           if (currentFull === serverdata[j].date) {
             is_sign = true;

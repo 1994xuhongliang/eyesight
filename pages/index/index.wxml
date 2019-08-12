@@ -1,5 +1,4 @@
 <view class="container">
-  <image class="bg" src="../../public/img/bg_index.png"></image>
   <view class="main-container">
    <image class="logo" src="../../public/img/index-logo.png"></image>
    <button class="goTesting button" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">

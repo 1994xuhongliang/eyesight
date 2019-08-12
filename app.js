@@ -12,7 +12,7 @@ App({
     var a=this;
     wx.login({
       success: function (e) {
-        var o = a.globalData.userData,t="http://zmc-vital.com/wechat/gate/loginWithoutAuth"
+        var o = a.globalData.userData,t="https://wechat.zmc-vital.com/gate/loginWithoutAuth"
         wx.request({
           url: t,
           data: {
@@ -25,31 +25,23 @@ App({
             o.id=e.data.id;
             o.session=e.data.session_key;
             o.auth=e.data.auth;
+
+            ///////得到测试信息
+            var tt="https://wechat.zmc-vital.com/eyesight/getEyeSight"
+            wx.request({
+              url: tt,
+              data: {
+                id:o.id,
+                auth:o.auth
+              },
+              method: "POST",
+              success: function (e) {
+                console.log("get eyesight")
+                o.eyeSight=e.data.eyeSight;
+              }
+            })
           }
         });
-
-        // var o = a.globalData.wxData, t = "https://api.weixin.qq.com/sns/jscode2session?appid=" + o.appId + "&secret=" + o.appSecret + "&js_code=" + e.code + "&grant_type=authorization_code";
-        // wx.request({
-        //   url: t,
-        //   data: {},
-        //   method: "GET",
-        //   success: function (e) {
-        //     var o = {};
-        //     o.openid = e.data.openid, console.log("根据logincode 返回的sessionkey",e),
-        //       o.expires_in = Date.now() + e.data.expires_in;
-        //   }
-        // });
-        // var n = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + o.appId + "&secret=" + o.appSecret;
-        // wx.request({
-        //   url: n,
-        //   method: "GET",
-        //   data: {},
-        //   success: function (e) {
-        //     var o = {};
-        //     o = e.data, console.log("获取token",e), console.log(getApp().globalData.wxData), getApp().globalData.wxData.token = o.access_token,
-        //       console.log("token测试值"), console.log(getApp().globalData.wxData);
-        //   }
-        // });
       }
     });
   },
@@ -70,7 +62,7 @@ App({
       session:null,
       auth:null,
       phoneNumber:null,
-      eyesight:null
+      eyeSight:null
     },
     resultItems: {
       viewResult: null, //视力值

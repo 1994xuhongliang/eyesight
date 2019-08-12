@@ -119,32 +119,48 @@
 }
 
 .presbyopia .presbyopia-select-area {
+  width: 500rpx;
+  height: 240rpx;
   box-sizing: border-box;
-  padding: 0 40rpx;
-  margin: 60rpx auto 0;
+  /* padding: 0 40rpx; */
+  margin: 30rpx auto 0;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 }
 
 .presbyopia .presbyopia-select-area button {
-  width: 300rpx;
-  height: 80rpx;
+  /* width: 300rpx; */
+  width: 500rpx;
+  height: 70rpx;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30rpx;
   color: #fff;
-  border-radius: 10rpx;
+  border-radius: 35rpx;
 }
 
 .presbyopia .presbyopia-select-area button:first-child {
-  border:1px solid #e22d00;
-  color: #e22d00;
+  /* border:1px solid #e22d00;
+  color: #e22d00; */
+  background: #e22d00;
+  color: #fff;
+}
+
+.presbyopia .presbyopia-select-area button:nth-child(2) {
+  /* border:1px solid #ababab;
+  color: #ababab; */
+  background: #d1d1d1;
+  color: #fff;
 }
 .presbyopia .presbyopia-select-area button:last-child {
-  border:1px solid green;
-  color: green;
+  /* border:1px solid green;
+  color: green; */
+  background:green;
+  color: #fff;
 }
 
 .maculafundus {
@@ -251,14 +267,42 @@
     line-height: 288rpx;
 }
 
-.ce {
-    position: absolute;
-    width: 120rpx;
-    height: 60rpx;
+.btn-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 0;
+}
+
+.btn-box .ce {
+    width: 180rpx;
+    height: 65rpx;
+    border-radius: 32.5rpx;
     color: white;
     font-size: 14px;
-    line-height: 60rpx;
     background-image: linear-gradient(-144deg,#399DF7 0%,#136BFE 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0;
+}
+
+.btn-box .ce.center {
+    background: #d1d1d1;
+    font-size: 14px;
+    margin: 0 20rpx;
+}
+
+/* .ce {
+    position: absolute;
+    width: 160rpx;
+    height: 80rpx;
+    color: white;
+    font-size: 14px;
+    background-image: linear-gradient(-144deg,#399DF7 0%,#136BFE 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .up {
@@ -291,7 +335,7 @@
 .right {
     right: 20%;
     top: 30%;
-}
+} */
 
 .cecanvas {
     position: relative;
@@ -347,6 +391,14 @@
     color: #e22d00;
     top: -95%;
     left: 15%;
+}
+
+.seTF.right {
+
+}
+
+.seTF.wrong {
+
 }
 
 .doLine {
@@ -468,17 +520,18 @@
 
 .submitResult button {
     color: white;
-    line-height: 250%;
-    text-align: center;
-    display: inline-block;
     width: 330rpx;
-    background: #606060;
-    border-radius: 22rpx;
+    height: 80rpx;
+    background: #d1d1d1;
+    border-radius: 40rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32rpx;
 }
 
 .submitResult .surebtn {
     background-image: linear-gradient(-144deg,#39CFF7 0%,#136BFE 100%);
-    border-radius: 22rpx;
 }
 
 .centerTwoF {

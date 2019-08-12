@@ -259,13 +259,15 @@
 }
 
 .day-sign .main .card .progress-box .progress-top .progress-top-item {
-  width: 28rpx;
-  height: 25rpx;
+  /* width: 28rpx;
+  height: 25rpx; */
   font-size: 20rpx;
   line-height: 1;
   color: #000;
 }
 .day-sign .main .card .progress-box .progress-top .progress-top-item.gift-icon {
+    width: 28rpx;
+  height: 25rpx;
   background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAZCAMAAAAVHr4VAAAAflBMVEUAAADQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyHQPyFWWo5XAAAAKXRSTlMAR2SE5Vd7aznyc2DIT7eXi1r54tbQSjIo38CQh24/CATo3K+jnY4YpqTH63UAAADkSURBVCjP3ZHZksIgEEWbhJggIbvGLJq4ztz//8Fh03Ko8gc8Dw2XA0VVN72YOZ+JKt7GFLLsIATGEaLBuAYyxkM/A/SzEsdAtjBVNKZiCGT3LrtAbjCtywTE61IiJc99wJOzKfwVh4p24C3n/JLnAhaR5xd90J5RaEmek5P9M/+TByd/3mSOSEaWycnKJXnEVcuPFJSpGUUtpaxL/CbJDZUNV2xUb/7y7cpQEykcbIj83wxuDgm2RCmYb0r2bVJh66ci9Q0/lRQnu/boFNvv2QM3xu6IzV51vlNUwiEaU3wotfgDHtElSmrPwSgAAAAASUVORK5CYII=') center no-repeat;
   background-size: cover;
 }

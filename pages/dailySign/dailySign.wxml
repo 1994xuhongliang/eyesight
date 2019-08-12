@@ -52,7 +52,7 @@
         <view class="progress-top">
           <view class="progress-top-item">1天</view>
           <view class="progress-top-item gift-icon"></view>
-           <view class="progress-top-item gift-icon"></view>
+          <view class="progress-top-item gift-icon"></view>
         </view>
         <view class="progress-main">
           <view class="progress-dot ten-day">
@@ -67,6 +67,7 @@
           <view class="progress" style="width: {{100*sign_count / 30}}%"></view>
         </view>
         <view class="progress-bottom">
+          <!-- <view class="bottom-text">1天</view> -->
           <view class="bottom-text ten-day">10天</view>
           <view class="bottom-text fifteen-day">15天</view>
           <view class="bottom-text thirty-day">30天</view>
@@ -85,7 +86,7 @@
       <view class="text-2">你已累计打卡{{sign_count}}，</view>
       <view class="text-3" wx:if="{{sign_count === 10}}">距离丰厚奖励还剩5天</view>
       <view class="text-3" wx:if="{{sign_count >= 15}}">达到领奖条件</view>
-      <view class="toast-confirm">确认</view>
+      <view class="toast-confirm" bindtap="sureSignToast">确认</view>
     </view>
   </view>
 
